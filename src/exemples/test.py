@@ -150,8 +150,12 @@ class Test:
         Returns:
             Tuple[Tenseur]: Les données générées
         """
-        if type(X) is pd.DataFrame:
-            X, y = X.to_numpy(), y.to_numpy()  # type: ignore
+        if type(X) is pd.DataFrame or type(X) is pd.Series:
+            X = X.to_numpy()  # type: ignore
+
+        if type(y) is pd.DataFrame or type(y) is pd.Series:
+            y = y.to_numpy()  # type: ignore
+
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=test_size, random_state=seed
         )
