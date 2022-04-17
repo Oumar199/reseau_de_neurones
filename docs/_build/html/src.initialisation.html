@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.initialisation package &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="src.layers package" href="src.layers.html" />
+    <link rel="prev" title="src.graphic package" href="src.graphic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src.initialisation package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.initialisation.aleatoire">src.initialisation.aleatoire module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.initialisation.he_init">src.initialisation.he_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.initialisation.initialisation">src.initialisation.initialisation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.initialisation.zeros">src.initialisation.zeros module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.initialisation">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialisation-des-parametres">Initialisation des paramètres</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>src.initialisation package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.initialisation.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-initialisation-package">
+<h1>src.initialisation package<a class="headerlink" href="#src-initialisation-package" title="Lien permanent vers ce titre"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre"></a></h2>
+</section>
+<section id="module-src.initialisation.aleatoire">
+<span id="src-initialisation-aleatoire-module"></span><h2>src.initialisation.aleatoire module<a class="headerlink" href="#module-src.initialisation.aleatoire" title="Lien permanent vers ce titre"></a></h2>
+<p>Initialisation de paramètres avec des valeurs aléatoires.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.initialisation.aleatoire.RandomInit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.initialisation.aleatoire.</span></span><span class="sig-name descname"><span class="pre">RandomInit</span></span><a class="reference internal" href="_modules/src/initialisation/aleatoire.html#RandomInit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.aleatoire.RandomInit" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.initialisation.initialisation.Initialisation" title="src.initialisation.initialisation.Initialisation"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.initialisation.initialisation.Initialisation</span></code></a></p>
+<p>Classe qui initialise les paramètres avec des valeurs aléatoires</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.initialisation.aleatoire.RandomInit.initialisation">
+<span class="sig-name descname"><span class="pre">initialisation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/initialisation/aleatoire.html#RandomInit.initialisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.aleatoire.RandomInit.initialisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Génération des paramètres</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape_1</strong> (<em>int</em>) – La taille des entrées</p></li>
+<li><p><strong>shape_2</strong> (<em>int</em>) – La taille des sorties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Les paramètres générés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.initialisation.he_init">
+<span id="src-initialisation-he-init-module"></span><h2>src.initialisation.he_init module<a class="headerlink" href="#module-src.initialisation.he_init" title="Lien permanent vers ce titre"></a></h2>
+<p>Initialisation HE.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.initialisation.he_init.HeInit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.initialisation.he_init.</span></span><span class="sig-name descname"><span class="pre">HeInit</span></span><a class="reference internal" href="_modules/src/initialisation/he_init.html#HeInit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.he_init.HeInit" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.initialisation.initialisation.Initialisation" title="src.initialisation.initialisation.Initialisation"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.initialisation.initialisation.Initialisation</span></code></a></p>
+<p>Classe qui initialise les paramètres avec l’initialisation HE</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.initialisation.he_init.HeInit.initialisation">
+<span class="sig-name descname"><span class="pre">initialisation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/initialisation/he_init.html#HeInit.initialisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.he_init.HeInit.initialisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Génération des paramètres</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape_1</strong> (<em>int</em>) – La taille des entrées</p></li>
+<li><p><strong>shape_2</strong> (<em>int</em>) – La taille des sorties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Les paramètres générés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.initialisation.initialisation">
+<span id="src-initialisation-initialisation-module"></span><h2>src.initialisation.initialisation module<a class="headerlink" href="#module-src.initialisation.initialisation" title="Lien permanent vers ce titre"></a></h2>
+<p>L’initialisation est une importante très importante car elle peut rendre plus compliquée l’atteinte des paramètres
+optimales par le réseau. Les paramètres de chaque couche seront initialisées avec des nombres aléatoires pour certains
+et pour d’autres avec des nombres fixes. Des paramètres avec des valeurs d’initialisation très grandes peuvent
+souvent prendre plus de temps à être optimisés.</p>
+<p>Il y a principalement trois facons d’initialiser les paramètres:</p>
+<ul class="simple">
+<li><p>Avec des zeros : Toutes les paramètres du réseau seront mis à zero</p></li>
+<li><p>De manière aléatoire : Les paramètress sont initialisées de manière aléatoire</p></li>
+<li><p>Avec une initialisation HE : Initialisation des paramètres en multipliant les valeurs aléatoires</p></li>
+</ul>
+<p>produit avec un facteur de normalisation</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{\frac{2}{\text{taille des entrées}}}\]</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.initialisation.initialisation.Initialisation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.initialisation.initialisation.</span></span><span class="sig-name descname"><span class="pre">Initialisation</span></span><a class="reference internal" href="_modules/src/initialisation/initialisation.html#Initialisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.initialisation.Initialisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Classe permettant l’initialisation des paramètres</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.initialisation.initialisation.Initialisation.initialisation">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialisation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/initialisation/initialisation.html#Initialisation.initialisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.initialisation.Initialisation.initialisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Génération des paramètres</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape_1</strong> (<em>int</em>) – La taille des entrées</p></li>
+<li><p><strong>shape_2</strong> (<em>int</em>) – La taille des sorties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Les paramètres générés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.initialisation.zeros">
+<span id="src-initialisation-zeros-module"></span><h2>src.initialisation.zeros module<a class="headerlink" href="#module-src.initialisation.zeros" title="Lien permanent vers ce titre"></a></h2>
+<p>Initialisation de paramètres avec des zeros.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.initialisation.zeros.ZerosInit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.initialisation.zeros.</span></span><span class="sig-name descname"><span class="pre">ZerosInit</span></span><a class="reference internal" href="_modules/src/initialisation/zeros.html#ZerosInit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.zeros.ZerosInit" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.initialisation.initialisation.Initialisation" title="src.initialisation.initialisation.Initialisation"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.initialisation.initialisation.Initialisation</span></code></a></p>
+<p>Classe qui initialise les paramètres avec des zeros</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.initialisation.zeros.ZerosInit.initialisation">
+<span class="sig-name descname"><span class="pre">initialisation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/initialisation/zeros.html#ZerosInit.initialisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.initialisation.zeros.ZerosInit.initialisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Génération des paramètres</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape_1</strong> (<em>int</em>) – La taille des entrées</p></li>
+<li><p><strong>shape_2</strong> (<em>int</em>) – La taille des sorties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Les paramètres générés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.initialisation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.initialisation" title="Lien permanent vers ce titre"></a></h2>
+<section id="initialisation-des-parametres">
+<h3>Initialisation des paramètres<a class="headerlink" href="#initialisation-des-parametres" title="Lien permanent vers ce titre"></a></h3>
+<p>L’initialisation des paramètres doit être fait avant de commencer le processus d’entraînement du réseau de neurones.
+Chaque paramètre de chaque couche doit être initialisé à une valeur. Cette valeur sera ensuite mise à jour lors
+de l’optimisation.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="src.graphic.html" class="btn btn-neutral float-left" title="src.graphic package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="src.layers.html" class="btn btn-neutral float-right" title="src.layers package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

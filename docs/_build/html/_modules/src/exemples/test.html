@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.exemples.test &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Code du module</a> &raquo;</li>
+      <li>src.exemples.test</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de src.exemples.test</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Nous devons pouvoir effectuer des tests sur des données. Ainsi il sera nécessaire de devoir fournir des </span>
+<span class="sd">hyperparamètres pour effectuer les entraînements et choisir le type de test à effectuer.</span>
+
+<span class="sd">Nous effectuerons dans cet exemple un test sur les données concernant les fleurs d&#39;iris.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">RobustScaler</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">src.tenseurs</span> <span class="kn">import</span> <span class="n">Tenseur</span>
+<span class="kn">from</span> <span class="nn">src.initialisation.aleatoire</span> <span class="kn">import</span> <span class="n">RandomInit</span>
+<span class="kn">from</span> <span class="nn">src.initialisation.he_init</span> <span class="kn">import</span> <span class="n">HeInit</span>
+<span class="kn">from</span> <span class="nn">src.initialisation.initialisation</span> <span class="kn">import</span> <span class="n">Initialisation</span>
+<span class="kn">from</span> <span class="nn">src.initialisation.zeros</span> <span class="kn">import</span> <span class="n">ZerosInit</span>
+<span class="kn">from</span> <span class="nn">src.layers.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">src.layers.lineaire</span> <span class="kn">import</span> <span class="n">Lineaire</span>
+<span class="kn">from</span> <span class="nn">src.layers.sigactivation</span> <span class="kn">import</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">sigmoid_prime</span><span class="p">,</span> <span class="n">SigActivation</span>
+<span class="kn">from</span> <span class="nn">src.layers.reluactivation</span> <span class="kn">import</span> <span class="n">relu</span><span class="p">,</span> <span class="n">relu_prime</span><span class="p">,</span> <span class="n">ReluActivation</span>
+<span class="kn">from</span> <span class="nn">src.layers.tanhactivation</span> <span class="kn">import</span> <span class="n">tanh</span><span class="p">,</span> <span class="n">tanh_prime</span><span class="p">,</span> <span class="n">TanhActivation</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.logisticloss</span> <span class="kn">import</span> <span class="n">LogisticLoss</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.loss</span> <span class="kn">import</span> <span class="n">Loss</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.mae</span> <span class="kn">import</span> <span class="n">MAE</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.mse</span> <span class="kn">import</span> <span class="n">MSE</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.hinge_loss</span> <span class="kn">import</span> <span class="n">HingeLoss</span>
+<span class="kn">from</span> <span class="nn">src.nn.neuralnet</span> <span class="kn">import</span> <span class="n">NeuralNetwork</span>
+<span class="kn">from</span> <span class="nn">src.optimisation.optimize</span> <span class="kn">import</span> <span class="n">Optimisation</span>
+<span class="kn">from</span> <span class="nn">src.optimisation.sgd</span> <span class="kn">import</span> <span class="n">SGD</span>
+<span class="kn">from</span> <span class="nn">src.graphic.animation</span> <span class="kn">import</span> <span class="n">Animation</span>
+
+
+<div class="viewcode-block" id="Test"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test">[docs]</a><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Classe créée pour effectuer des tests.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Aucune initialisation.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Test.get_sequence"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.get_sequence">[docs]</a>    <span class="k">def</span> <span class="nf">get_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">default_input_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NeuralNetwork</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Permet de déterminer la séquence de couches</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sequence (List[str]): Séquence de couches</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">layers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Layer</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n_lineaire</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">output_size</span> <span class="o">=</span> <span class="n">default_input_size</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">couche</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">couche</span> <span class="o">==</span> <span class="s2">&quot;lineaire&quot;</span><span class="p">:</span>
+                <span class="n">n_lineaire</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">th</span> <span class="o">=</span> <span class="s2">&quot;ième&quot;</span> <span class="k">if</span> <span class="n">n_lineaire</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;ière&quot;</span>
+                <span class="n">input_size</span> <span class="o">=</span> <span class="n">output_size</span>
+                <span class="n">output_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                    <span class="nb">input</span><span class="p">(</span>
+                        <span class="s2">&quot;Fournissez la taille des sorties de la </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> couche linéaire svp : &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">n_lineaire</span><span class="p">,</span> <span class="n">th</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lineaire</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
+            <span class="k">elif</span> <span class="n">couche</span> <span class="o">==</span> <span class="s2">&quot;sigmoide&quot;</span><span class="p">:</span>
+                <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SigActivation</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">,</span> <span class="n">sigmoid_prime</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
+            <span class="k">elif</span> <span class="n">couche</span> <span class="o">==</span> <span class="s2">&quot;relu&quot;</span><span class="p">:</span>
+                <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReluActivation</span><span class="p">(</span><span class="n">relu</span><span class="p">,</span> <span class="n">relu_prime</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
+            <span class="k">elif</span> <span class="n">couche</span> <span class="o">==</span> <span class="s2">&quot;tanh&quot;</span><span class="p">:</span>
+                <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TanhActivation</span><span class="p">(</span><span class="n">tanh</span><span class="p">,</span> <span class="n">tanh_prime</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;La couche </span><span class="si">{}</span><span class="s2"> n&#39;existe pas ! Veuillez vérifier si la valeur fournie est bonne.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">couche</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">layers</span>  <span class="c1"># type: ignore</span></div>
+
+<div class="viewcode-block" id="Test.get_loss"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.get_loss">[docs]</a>    <span class="k">def</span> <span class="nf">get_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loss</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Loss</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Récupération de la fonction de perte</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            loss (str): Le nom de la fonction de perte</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Loss: La fonction de perte</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">loss</span> <span class="o">==</span> <span class="s2">&quot;logistic&quot;</span><span class="p">:</span>
+            <span class="n">loss_function</span> <span class="o">=</span> <span class="n">LogisticLoss</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">elif</span> <span class="n">loss</span> <span class="o">==</span> <span class="s2">&quot;mse&quot;</span><span class="p">:</span>
+            <span class="n">loss_function</span> <span class="o">=</span> <span class="n">MSE</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">elif</span> <span class="n">loss</span> <span class="o">==</span> <span class="s2">&quot;mae&quot;</span><span class="p">:</span>
+            <span class="n">loss_function</span> <span class="o">=</span> <span class="n">MAE</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">elif</span> <span class="n">loss</span> <span class="o">==</span> <span class="s2">&quot;hingeloss&quot;</span><span class="p">:</span>
+            <span class="n">loss_function</span> <span class="o">=</span> <span class="n">HingeLoss</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;La fonction </span><span class="si">{}</span><span class="s2"> n&#39;est pas reconnue en tant que fonction de perte. Etes-vous sûr d&#39;avoir choisi la bonne fonction !&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">loss</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">loss_function</span>  <span class="c1"># type: ignore</span></div>
+
+<div class="viewcode-block" id="Test.get_optimiser"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.get_optimiser">[docs]</a>    <span class="k">def</span> <span class="nf">get_optimiser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimiseur</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optimisation</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Récupération de l&#39;optimiseur.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            optimiseur (str): Nom de l&#39;optimiseur ou de la technique d&#39;optimisation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optimisation: L&#39;optimiseur.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">optimiseur</span> <span class="o">==</span> <span class="s2">&quot;sgd&quot;</span><span class="p">:</span>
+            <span class="n">optimisation</span> <span class="o">=</span> <span class="n">SGD</span>  <span class="c1"># type: ignore</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;La méthode d&#39;optimisation </span><span class="si">{}</span><span class="s2"> n&#39;existe pas !&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">optimiseur</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">optimisation</span>  <span class="c1"># type: ignore</span></div>
+
+<div class="viewcode-block" id="Test.get_initialisation"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.get_initialisation">[docs]</a>    <span class="k">def</span> <span class="nf">get_initialisation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initialisation</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Initialisation</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Récupération du type d&#39;initialisation des paramètres.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            initialisation (str): Le nom du type d&#39;initialisation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Initialisation: La classe d&#39;initialisation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">initialisation</span> <span class="o">==</span> <span class="s2">&quot;aleatoire&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">RandomInit</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">initialisation</span> <span class="o">==</span> <span class="s2">&quot;zeros&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">ZerosInit</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">initialisation</span> <span class="o">==</span> <span class="s2">&quot;he&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">HeInit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;La méthode d&#39;initialisation </span><span class="si">{}</span><span class="s2"> n&#39;existe pas !&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">initialisation</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Test.split_data"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.split_data">[docs]</a>    <span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tenseur</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Séparation des données en données d&#39;entraînement et en données de test</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X (Tenseur): Les variables explicatives</span>
+<span class="sd">            y (Tenseur): La variable à expliquée</span>
+<span class="sd">            test_size (float, optional): La taille des données de test. Defaults to 0.2.</span>
+<span class="sd">            seed (int, optional): _description_. Defaults to 1.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[Tenseur]: Les données générées</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="ow">is</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>  <span class="c1"># type: ignore</span></div>
+    
+<div class="viewcode-block" id="Test.normalisation"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.normalisation">[docs]</a>    <span class="k">def</span> <span class="nf">normalisation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Tenseur</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Permet la normalisation des données</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (Tenseur): Les données à normaliser</span>
+<span class="sd">            mode (str, optional): Le mode de normalisation. Peut prendre une valeur entre &#39;standard&#39;</span>
+<span class="sd">            pour la standardisation, &#39;minmax&#39; pour la normalisation min_max ou &#39;robust&#39; pour la </span>
+<span class="sd">            normalisation robuste. Defaults to &quot;standard&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tenseur: Les données normalisées</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">normalizer</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span> <span class="k">else</span> <span class="n">MinMaxScaler</span><span class="p">()</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;minmax&quot;</span> <span class="k">else</span> <span class="n">RobustScaler</span><span class="p">()</span>
+        
+        <span class="n">norm_data</span> <span class="o">=</span> <span class="n">normalizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">norm_data</span><span class="p">,</span> <span class="n">normalizer</span></div>
+
+<div class="viewcode-block" id="Test.test"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sequence</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">loss</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">optimiseur</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Application des tests suivant les hyperparamètres fournis</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sequence (List[str]): Une séquence de couches qui peuvent prendre les valeurs &#39;lineaire&#39; pour la couche linéaire,</span>
+<span class="sd">            &#39;sigmoide&#39; pour la couche sigmoide, &#39;relu&#39; pour la couche relu ou &#39;tanh&#39; pour tanh. La séquence doit être complète pour</span>
+<span class="sd">            éviter certains bug.</span>
+<span class="sd">            batch_size (int): La longueur d&#39;un batch.</span>
+<span class="sd">            learning_rate (float): Le taux d&#39;apprentissage.</span>
+<span class="sd">            epochs (int): Le nombre d&#39;itérations.</span>
+<span class="sd">            loss (str): La fonction perte à utiliser. Peut prendre les valeurs &#39;logistic&#39; pour la fonction de perte logistique, &#39;mse&#39;</span>
+<span class="sd">            pour l&#39;erreur quadratique, &#39;mae&#39; pour l&#39;erreur absolue ou &#39;hingeloss&#39; pour la perte hinge.</span>
+<span class="sd">            optimiseur (str): le type d&#39;optimiseur à utiliser. Peut prendre la valeur &#39;sgd&#39; pour la descente de gradient stochastique.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="o">...</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

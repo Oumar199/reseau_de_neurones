@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.graphic package &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="src.initialisation package" href="src.initialisation.html" />
+    <link rel="prev" title="src.exemples package" href="src.exemples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src.graphic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.graphic.animation">src.graphic.animation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.graphic.graphic">src.graphic.graphic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.graphic.simple_graphic">src.graphic.simple_graphic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.graphic">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#evaluation-avec-des-graphiques">Evaluation avec des graphiques</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>src.graphic package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.graphic.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-graphic-package">
+<h1>src.graphic package<a class="headerlink" href="#src-graphic-package" title="Lien permanent vers ce titre"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre"></a></h2>
+</section>
+<section id="module-src.graphic.animation">
+<span id="src-graphic-animation-module"></span><h2>src.graphic.animation module<a class="headerlink" href="#module-src.graphic.animation" title="Lien permanent vers ce titre"></a></h2>
+<p>Après l’entraînement du réseau on doit pouvoir tracer l’évolution des erreurs pour vérifier si tout s’est bien passé.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.graphic.animation.Animation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.graphic.animation.</span></span><span class="sig-name descname"><span class="pre">Animation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limitations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/graphic/animation.html#Animation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graphic.animation.Animation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.graphic.graphic.Graphic" title="src.graphic.graphic.Graphic"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.graphic.graphic.Graphic</span></code></a></p>
+<p>Classe permettant de connaître l’évolution des erreurs d’apprentissage.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.graphic.animation.Animation.evolution">
+<span class="sig-name descname"><span class="pre">evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_losses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_losses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/graphic/animation.html#Animation.evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graphic.animation.Animation.evolution" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Trace l’évolution des erreurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_losses</strong> (<em>List</em>) – Liste des erreurs sur les données d’entraînement.</p></li>
+<li><p><strong>test_losses</strong> (<em>List</em>) – Liste des erreurs sur les données de test.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em><em>, </em><em>optional</em>) – Le nombre d’itérations. Defaults to 100.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.graphic.graphic">
+<span id="src-graphic-graphic-module"></span><h2>src.graphic.graphic module<a class="headerlink" href="#module-src.graphic.graphic" title="Lien permanent vers ce titre"></a></h2>
+<p>On doit ajouter un graphique pour pouvoir tracer l’évolution des erreurs sur les données d’entraînement et sur les données de test au fur de l’entraînement du réseau</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.graphic.graphic.Graphic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.graphic.graphic.</span></span><span class="sig-name descname"><span class="pre">Graphic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limitations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/graphic/graphic.html#Graphic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graphic.graphic.Graphic" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Classe permettant de tracer des graphiques d’évolution des erreurs</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.graphic.graphic.Graphic.evolution">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_losses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_losses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/graphic/graphic.html#Graphic.evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graphic.graphic.Graphic.evolution" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Trace l’évolution des erreurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_losses</strong> (<em>List</em>) – Liste des erreurs sur les données d’entraînement.</p></li>
+<li><p><strong>test_losses</strong> (<em>List</em>) – Liste des erreurs sur les données de test.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em><em>, </em><em>optional</em>) – Le nombre d’itérations. Defaults to 100.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.graphic.simple_graphic">
+<span id="src-graphic-simple-graphic-module"></span><h2>src.graphic.simple_graphic module<a class="headerlink" href="#module-src.graphic.simple_graphic" title="Lien permanent vers ce titre"></a></h2>
+<p>Après l’entraînement du réseau on doit pouvoir tracer l’évolution des erreurs pour vérifier si tout s’est bien passé.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.graphic.simple_graphic.Plot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.graphic.simple_graphic.</span></span><span class="sig-name descname"><span class="pre">Plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limitations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/graphic/simple_graphic.html#Plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graphic.simple_graphic.Plot" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.graphic.graphic.Graphic" title="src.graphic.graphic.Graphic"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.graphic.graphic.Graphic</span></code></a></p>
+<p>Classe permettant de connaître l’évolution avec un simple graphique.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.graphic.simple_graphic.Plot.evolution">
+<span class="sig-name descname"><span class="pre">evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_losses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_losses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/graphic/simple_graphic.html#Plot.evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graphic.simple_graphic.Plot.evolution" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Trace l’évolution des erreurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_losses</strong> (<em>List</em>) – Liste des erreurs sur les données d’entraînement.</p></li>
+<li><p><strong>test_losses</strong> (<em>List</em>) – Liste des erreurs sur les données de test.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em><em>, </em><em>optional</em>) – Le nombre d’itérations. Defaults to 100.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.graphic">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.graphic" title="Lien permanent vers ce titre"></a></h2>
+<section id="evaluation-avec-des-graphiques">
+<h3>Evaluation avec des graphiques<a class="headerlink" href="#evaluation-avec-des-graphiques" title="Lien permanent vers ce titre"></a></h3>
+<p>L’évaluation de la performance d’un réseau est effectué grâce à des graphiques.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="src.exemples.html" class="btn btn-neutral float-left" title="src.exemples package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="src.initialisation.html" class="btn btn-neutral float-right" title="src.initialisation package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

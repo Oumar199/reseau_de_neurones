@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.lossfunction package &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="src.nn package" href="src.nn.html" />
+    <link rel="prev" title="src.layers package" href="src.layers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.layers.html">src.layers package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src.lossfunction package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.lossfunction.hinge_loss">src.lossfunction.hinge_loss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.lossfunction.logisticloss">src.lossfunction.logisticloss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.lossfunction.loss">src.lossfunction.loss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.lossfunction.mae">src.lossfunction.mae module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.lossfunction.mse">src.lossfunction.mse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.lossfunction">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fonctions-de-perte">Fonctions de perte</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>src.lossfunction package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.lossfunction.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-lossfunction-package">
+<h1>src.lossfunction package<a class="headerlink" href="#src-lossfunction-package" title="Lien permanent vers ce titre"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre"></a></h2>
+</section>
+<section id="module-src.lossfunction.hinge_loss">
+<span id="src-lossfunction-hinge-loss-module"></span><h2>src.lossfunction.hinge_loss module<a class="headerlink" href="#module-src.lossfunction.hinge_loss" title="Lien permanent vers ce titre"></a></h2>
+<p>La perte hinge.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.lossfunction.hinge_loss.HingeLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.lossfunction.hinge_loss.</span></span><span class="sig-name descname"><span class="pre">HingeLoss</span></span><a class="reference internal" href="_modules/src/lossfunction/hinge_loss.html#HingeLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.hinge_loss.HingeLoss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.lossfunction.loss.Loss" title="src.lossfunction.loss.Loss"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.lossfunction.loss.Loss</span></code></a></p>
+<p>Classe qui permet le calcul de la fonction de perte hinge.
+Elle hérite de la classe Loss.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.hinge_loss.HingeLoss.grad_loss">
+<span class="sig-name descname"><span class="pre">grad_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/lossfunction/hinge_loss.html#HingeLoss.grad_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.hinge_loss.HingeLoss.grad_loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Calcul du gradient de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Le gradient de la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.hinge_loss.HingeLoss.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/src/lossfunction/hinge_loss.html#HingeLoss.loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.hinge_loss.HingeLoss.loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Implémentation de la fonction de perte.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Ce que retourne la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.lossfunction.logisticloss">
+<span id="src-lossfunction-logisticloss-module"></span><h2>src.lossfunction.logisticloss module<a class="headerlink" href="#module-src.lossfunction.logisticloss" title="Lien permanent vers ce titre"></a></h2>
+<p>Perte logistique.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.lossfunction.logisticloss.LogisticLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.lossfunction.logisticloss.</span></span><span class="sig-name descname"><span class="pre">LogisticLoss</span></span><a class="reference internal" href="_modules/src/lossfunction/logisticloss.html#LogisticLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.logisticloss.LogisticLoss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.lossfunction.loss.Loss" title="src.lossfunction.loss.Loss"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.lossfunction.loss.Loss</span></code></a></p>
+<p>Classe qui permet le calcul de la fonction de perte logistique.
+Elle hérite de la classe Loss.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.logisticloss.LogisticLoss.grad_loss">
+<span class="sig-name descname"><span class="pre">grad_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/lossfunction/logisticloss.html#LogisticLoss.grad_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.logisticloss.LogisticLoss.grad_loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Calcul du gradient de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Le gradient de la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.logisticloss.LogisticLoss.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/src/lossfunction/logisticloss.html#LogisticLoss.loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.logisticloss.LogisticLoss.loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Implémentation de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Ce que retourne la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.lossfunction.loss">
+<span id="src-lossfunction-loss-module"></span><h2>src.lossfunction.loss module<a class="headerlink" href="#module-src.lossfunction.loss" title="Lien permanent vers ce titre"></a></h2>
+<p>Le loss function détermine la qualité de la prédiction. On peut la traduire littéralement par
+fonction de perte.
+Nous aurons besoin principalement de deux types de loss functions : <em>MSE</em>, <em>LogisticLoss</em>
+On peux en ajouter d’autres comme : <em>MAE</em>, <em>hinge_loss</em></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.lossfunction.loss.Loss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.lossfunction.loss.</span></span><span class="sig-name descname"><span class="pre">Loss</span></span><a class="reference internal" href="_modules/src/lossfunction/loss.html#Loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.loss.Loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Classe abstraite qui permet le calcul de la fonction de perte et de
+son gradient.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.loss.Loss.grad_loss">
+<span class="sig-name descname"><span class="pre">grad_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/lossfunction/loss.html#Loss.grad_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.loss.Loss.grad_loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Calcul du gradient de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Le gradient de la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.loss.Loss.loss">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/src/lossfunction/loss.html#Loss.loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.loss.Loss.loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Implémentation de la fonction de perte.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Ce que retourne la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.lossfunction.mae">
+<span id="src-lossfunction-mae-module"></span><h2>src.lossfunction.mae module<a class="headerlink" href="#module-src.lossfunction.mae" title="Lien permanent vers ce titre"></a></h2>
+<p>La perte absolue est la moyenne des valeurs absolues des différences entre les valeurs réelles
+et les valeurs prédites.</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{m}\sum_{i = 1}^m\left|y_i - f(x_i)\right|\]</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.lossfunction.mae.MAE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.lossfunction.mae.</span></span><span class="sig-name descname"><span class="pre">MAE</span></span><a class="reference internal" href="_modules/src/lossfunction/mae.html#MAE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.mae.MAE" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.lossfunction.loss.Loss" title="src.lossfunction.loss.Loss"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.lossfunction.loss.Loss</span></code></a></p>
+<p>Classe qui permet le calcul de la fonction de perte absolue.
+Elle hérite de la classe Loss.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.mae.MAE.grad_loss">
+<span class="sig-name descname"><span class="pre">grad_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/lossfunction/mae.html#MAE.grad_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.mae.MAE.grad_loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Calcul du gradient de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Le gradient de la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.mae.MAE.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/src/lossfunction/mae.html#MAE.loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.mae.MAE.loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Implémentation de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Ce que retourne la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.lossfunction.mse">
+<span id="src-lossfunction-mse-module"></span><h2>src.lossfunction.mse module<a class="headerlink" href="#module-src.lossfunction.mse" title="Lien permanent vers ce titre"></a></h2>
+<p>La perte quadratique est la moyenne des carrés des différences entre les valeurs réelles
+et les valeurs prédites.</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{m}\sum_{i = 1}^m\left(y_i - f(x_i)\right)^2\]</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.lossfunction.mse.MSE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.lossfunction.mse.</span></span><span class="sig-name descname"><span class="pre">MSE</span></span><a class="reference internal" href="_modules/src/lossfunction/mse.html#MSE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.mse.MSE" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.lossfunction.loss.Loss" title="src.lossfunction.loss.Loss"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.lossfunction.loss.Loss</span></code></a></p>
+<p>Classe qui permet le calcul de la fonction de perte quadratique.
+Elle hérite de la classe Loss.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.mse.MSE.grad_loss">
+<span class="sig-name descname"><span class="pre">grad_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/lossfunction/mse.html#MSE.grad_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.mse.MSE.grad_loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Calcul du gradient de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Le gradient de la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.lossfunction.mse.MSE.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/src/lossfunction/mse.html#MSE.loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.lossfunction.mse.MSE.loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Implémentation de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>Tenseur</em>) – Les valeurs prédites</p></li>
+<li><p><strong>actual</strong> (<em>Tenseur</em>) – Les valeurs réelles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Ce que retourne la fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.lossfunction">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.lossfunction" title="Lien permanent vers ce titre"></a></h2>
+<section id="fonctions-de-perte">
+<h3>Fonctions de perte<a class="headerlink" href="#fonctions-de-perte" title="Lien permanent vers ce titre"></a></h3>
+<p>Le but du réseau de neurones est de diminuer la perte occasionnée à chaque sortie. Pour calculer
+cette denière on fait la différence entre les valeurs réelles et les valeurs prédites.
+Lors du processus de diminution de la perte, on utilise le gradient de la fonction de perte.
+Ainsi, il est nécessaire de les connaître toutes les deux pour optimiser l’efficacité du réseau.
+Il existe plusieurs fonctions de perte mais nous n’en prendront que quelques uns,
+notamment les plus utilisables :</p>
+<ul class="simple">
+<li><p>MSE ;</p></li>
+<li><p>MAE ;</p></li>
+<li><p>LogisticLoss ;</p></li>
+<li><p>HingeLoss.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="src.layers.html" class="btn btn-neutral float-left" title="src.layers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="src.nn.html" class="btn btn-neutral float-right" title="src.nn package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

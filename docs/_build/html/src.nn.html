@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.nn package &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="src.optimisation package" href="src.optimisation.html" />
+    <link rel="prev" title="src.lossfunction package" href="src.lossfunction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.nn.neuralnet">src.nn.neuralnet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.nn">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reseau-de-neurones">Réseau de neurones</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>src.nn package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.nn.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-nn-package">
+<h1>src.nn package<a class="headerlink" href="#src-nn-package" title="Lien permanent vers ce titre"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre"></a></h2>
+</section>
+<section id="module-src.nn.neuralnet">
+<span id="src-nn-neuralnet-module"></span><h2>src.nn.neuralnet module<a class="headerlink" href="#module-src.nn.neuralnet" title="Lien permanent vers ce titre"></a></h2>
+<p>La première couche du réseau accepte en entrées un échantillon qu’on lui fournit. Le réseau va ensuite
+effectuer des transformations dans chaque couche qui le compose (forward propagation) et suivant la
+perte mesurée au niveau de la sortie du réseau, il décidera s’il faut modifier les paramètres avec
+la propagation en arrière (backward propagation) et refaire un forward. Ce processus se répète ainsi un
+certain nombre de fois jusqu’à ce que la perte soit la plus minimale possible. Le réseau est configuré
+suivant la séquence de couches qu’on lui fournit et la composition de chaque couche (nombre de noeuds).</p>
+<p><strong>A noter</strong> : Un réseau profond réagira mieux qu’avec un réseau étendu en largeur avec le même nombre de poids (ou paramètres).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.nn.neuralnet.NeuralNetwork">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.nn.neuralnet.</span></span><span class="sig-name descname"><span class="pre">NeuralNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reseau</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="src.layers.html#src.layers.layer.Layer" title="src.layers.layer.Layer"><span class="pre">src.layers.layer.Layer</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/nn/neuralnet.html#NeuralNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.nn.neuralnet.NeuralNetwork" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Réseau de neurones</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.nn.neuralnet.NeuralNetwork.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/nn/neuralnet.html#NeuralNetwork.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.nn.neuralnet.NeuralNetwork.backward" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Appliquer le backward propagation sur chaque couche</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>grad</strong> (<em>Tenseur</em>) – Le gradient de la dernière couche</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Le dernier gradien calculé lors de la backpropagation</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.nn.neuralnet.NeuralNetwork.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="_modules/src/nn/neuralnet.html#NeuralNetwork.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.nn.neuralnet.NeuralNetwork.forward" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Appliquer le forward propagation sur chaque couche</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>inputs</strong> (<em>Tenseur</em>) – Les données en entrée du réseau</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>La sortie du réseau</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.nn.neuralnet.NeuralNetwork.param_grad">
+<span class="sig-name descname"><span class="pre">param_grad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/nn/neuralnet.html#NeuralNetwork.param_grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.nn.neuralnet.NeuralNetwork.param_grad" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Récupération des paramètres et des gradients à l’aide d’un générateur</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p><em>Iterator[Tuple[Tenseur, Tenseur]]</em> – Les paramètres et gradient du réseau</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.nn">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.nn" title="Lien permanent vers ce titre"></a></h2>
+<section id="reseau-de-neurones">
+<h3>Réseau de neurones<a class="headerlink" href="#reseau-de-neurones" title="Lien permanent vers ce titre"></a></h3>
+<p>Le réseau comprend plusieurs couches. Chaque couche applique une certaine transformation à ces entrées
+puis renvoie le résultat de cette transformation. La dernière couche du réseau va renvoyer la sortie finale
+suivant le type d’apprentissage. La dernière couche comporte une fonction d’activation <em>sigmoid</em> s’il s’agit
+d’une classification binaire, <em>softmax</em> s’il s’agît d’une classification multi-classe et <em>fonction linéaire</em> s’il
+s’agit d’une régression.</p>
+<p>Suivant la prédiction effectuée, on saura ainsi s’il faut ou pas corriger les paramètres du réseau.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="src.lossfunction.html" class="btn btn-neutral float-left" title="src.lossfunction package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="src.optimisation.html" class="btn btn-neutral float-right" title="src.optimisation package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
