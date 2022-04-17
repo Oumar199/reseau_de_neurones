@@ -23,10 +23,7 @@ class Animation(Graphic):
         self.limitations = limitations
 
     def evolution(
-        self,
-        train_losses: List,
-        test_losses: List,
-        epochs: int = 100
+        self, train_losses: List, test_losses: List, epochs: int = 100
     ) -> None:
         """Trace l'évolution des erreurs.
 
@@ -45,7 +42,10 @@ class Animation(Graphic):
             plt.cla()
             if self.limitations:
                 plt.xlim(-10, epochs + 10)
-                plt.ylim(min(train_losses + test_losses) - 3, max(train_losses + test_losses) + 3)
+                plt.ylim(
+                    min(train_losses + test_losses) - 3,
+                    max(train_losses + test_losses) + 3,
+                )
             plt.plot(train_losses[:i], label="train losses")
             plt.plot(test_losses[:i], label="test losses")
             plt.legend()

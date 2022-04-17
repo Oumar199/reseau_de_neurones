@@ -20,10 +20,7 @@ class Graphic(ABC):
 
     @abstractmethod
     def evolution(
-        self,
-        train_losses: List,
-        test_losses: List,
-        epochs: int = 100
+        self, train_losses: List, test_losses: List, epochs: int = 100
     ) -> None:
         """Trace l'évolution des erreurs.
 

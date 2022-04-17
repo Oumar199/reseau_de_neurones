@@ -54,7 +54,7 @@ class TestBoston(Test):
 
         # Normalisation des données
         inputs, normalizer = self.normalisation(inputs)
-        
+
         # Séparation en données d'entraînement et de test
         X_train, X_test, y_train, y_test = self.split_data(inputs, target)  # type: ignore
         X_train, X_test = X_train.T, X_test.T

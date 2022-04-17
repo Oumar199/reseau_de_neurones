@@ -68,5 +68,5 @@ class Training:
         graphic.evolution(
             self.train_errors,
             self.test_errors,  # type: ignore
-            self.epochs  # type: ignore
+            self.epochs,  # type: ignore
         )

@@ -231,21 +231,27 @@
             <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>  <span class="c1"># type: ignore</span></div>
-    
-<div class="viewcode-block" id="Test.normalisation"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.normalisation">[docs]</a>    <span class="k">def</span> <span class="nf">normalisation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Tenseur</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+
+<div class="viewcode-block" id="Test.normalisation"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.test.Test.normalisation">[docs]</a>    <span class="k">def</span> <span class="nf">normalisation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tenseur</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
         <span class="sd">&quot;&quot;&quot;Permet la normalisation des données</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data (Tenseur): Les données à normaliser</span>
 <span class="sd">            mode (str, optional): Le mode de normalisation. Peut prendre une valeur entre &#39;standard&#39;</span>
-<span class="sd">            pour la standardisation, &#39;minmax&#39; pour la normalisation min_max ou &#39;robust&#39; pour la </span>
+<span class="sd">            pour la standardisation, &#39;minmax&#39; pour la normalisation min_max ou &#39;robust&#39; pour la</span>
 <span class="sd">            normalisation robuste. Defaults to &quot;standard&quot;.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tenseur: Les données normalisées</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">normalizer</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span> <span class="k">else</span> <span class="n">MinMaxScaler</span><span class="p">()</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;minmax&quot;</span> <span class="k">else</span> <span class="n">RobustScaler</span><span class="p">()</span>
-        
+        <span class="n">normalizer</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">StandardScaler</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span>
+            <span class="k">else</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;minmax&quot;</span>
+            <span class="k">else</span> <span class="n">RobustScaler</span><span class="p">()</span>
+        <span class="p">)</span>
+
         <span class="n">norm_data</span> <span class="o">=</span> <span class="n">normalizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">norm_data</span><span class="p">,</span> <span class="n">normalizer</span></div>
 

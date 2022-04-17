@@ -129,7 +129,7 @@
 
         <span class="c1"># Normalisation des données</span>
         <span class="n">inputs</span><span class="p">,</span> <span class="n">normalizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalisation</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
-        
+
         <span class="c1"># Séparation en données d&#39;entraînement et de test</span>
         <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_data</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
         <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">T</span>

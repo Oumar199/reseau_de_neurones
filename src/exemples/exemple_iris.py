@@ -51,18 +51,18 @@ class TestIris(Test):
 
         ## Encodage des données catégorielles : setosa = 0, versicolor = 1, virginica = 2
         iris["species"] = iris["species"].cat.codes
-        
+
         target = iris["species"]
-        
+
         inputs = iris.drop("species", axis=1)
-        
+
         # normalisation des données
         inputs, normalizer = self.normalisation(inputs)
-        
+
         X_train, X_test, y_train, y_test = self.split_data(inputs, target)  # type: ignore
-        
+
         X_train, X_test = X_train.T, X_test.T
-        
+
         y_train, y_test = y_train.reshape(1, y_train.shape[0]), y_test.reshape(
             1, y_test.shape[0]
         )

@@ -156,21 +156,27 @@ class Test:
             X, y, test_size=test_size, random_state=seed
         )
         return X_train, X_test, y_train, y_test  # type: ignore
-    
-    def normalisation(self, data: Tenseur, mode: str = "standard")->Tuple[Tenseur, Any]:  # type: ignore
+
+    def normalisation(self, data: Tenseur, mode: str = "standard") -> Tuple[Tenseur, Any]:  # type: ignore
         """Permet la normalisation des données
 
         Args:
             data (Tenseur): Les données à normaliser
             mode (str, optional): Le mode de normalisation. Peut prendre une valeur entre 'standard'
-            pour la standardisation, 'minmax' pour la normalisation min_max ou 'robust' pour la 
+            pour la standardisation, 'minmax' pour la normalisation min_max ou 'robust' pour la
             normalisation robuste. Defaults to "standard".
 
         Returns:
             Tenseur: Les données normalisées
         """
-        normalizer = StandardScaler() if mode == "standard" else MinMaxScaler() if mode == "minmax" else RobustScaler()
-        
+        normalizer = (
+            StandardScaler()
+            if mode == "standard"
+            else MinMaxScaler()
+            if mode == "minmax"
+            else RobustScaler()
+        )
+
         norm_data = normalizer.fit_transform(data)
         return norm_data, normalizer
 

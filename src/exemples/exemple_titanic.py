@@ -59,12 +59,12 @@ class TestTitanic(Test):
             titanic[column] = titanic[column].astype("category").cat.codes
 
         target = titanic["survived"]
-        
+
         inputs = titanic.drop("survived", axis=1)
-        
+
         # Normalisation des données
         inputs, normalizer = self.normalisation(inputs)
-        
+
         X_train, X_test, y_train, y_test = self.split_data(inputs, target)  # type: ignore
         X_train, X_test = X_train.T, X_test.T
         y_train, y_test = y_train.reshape(1, y_train.shape[0]), y_test.reshape(

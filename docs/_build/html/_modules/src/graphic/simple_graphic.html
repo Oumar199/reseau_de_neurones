@@ -98,10 +98,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">limitations</span> <span class="o">=</span> <span class="n">limitations</span>
 
 <div class="viewcode-block" id="Plot.evolution"><a class="viewcode-back" href="../../../src.graphic.html#src.graphic.simple_graphic.Plot.evolution">[docs]</a>    <span class="k">def</span> <span class="nf">evolution</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">train_losses</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
-        <span class="n">test_losses</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
-        <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">train_losses</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">test_losses</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Trace l&#39;évolution des erreurs.</span>
 
@@ -112,7 +109,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitations</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">train_losses</span> <span class="o">+</span> <span class="n">test_losses</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">train_losses</span> <span class="o">+</span> <span class="n">test_losses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span>
+                <span class="nb">min</span><span class="p">(</span><span class="n">train_losses</span> <span class="o">+</span> <span class="n">test_losses</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">train_losses</span> <span class="o">+</span> <span class="n">test_losses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
+            <span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;train losses&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test losses&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
