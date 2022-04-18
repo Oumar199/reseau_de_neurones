@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.training.training &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Code du module</a> &raquo;</li>
+      <li>src.training.training</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de src.training.training</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Cette étape est crucial et fera appel au réseau contenant les couches et qui sera capable d&#39;effectuer une</span>
+<span class="sd">suite de forward et de backward sur les données. L&#39;optimisation des paramètres sera cruciale pour trouver</span>
+<span class="sd">les paramètres de prédilection et sera effectuée entre un backward et la reprise du forward.</span>
+
+<span class="sd">Certains hyperparamètres seront utiles à l&#39;optimisation du paramètre.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">src.graphic.animation</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">src.graphic.graphic</span> <span class="kn">import</span> <span class="n">Graphic</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.logisticloss</span> <span class="kn">import</span> <span class="n">LogisticLoss</span>
+<span class="kn">from</span> <span class="nn">src.datas.datas</span> <span class="kn">import</span> <span class="n">BatchIterator</span>
+<span class="kn">from</span> <span class="nn">src.tenseurs</span> <span class="kn">import</span> <span class="n">Tenseur</span>
+<span class="kn">from</span> <span class="nn">src.lossfunction.mse</span> <span class="kn">import</span> <span class="n">MSE</span>
+<span class="kn">from</span> <span class="nn">src.nn.neuralnet</span> <span class="kn">import</span> <span class="n">NeuralNetwork</span>
+<span class="kn">from</span> <span class="nn">src.optimisation.sgd</span> <span class="kn">import</span> <span class="n">SGD</span>
+
+
+<div class="viewcode-block" id="Training"><a class="viewcode-back" href="../../../src.training.html#src.training.training.Training">[docs]</a><span class="k">class</span> <span class="nc">Training</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialisation de quelques hyperparamètres d&#39;entraînement. Ces paramètres sont ajustables.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lr (float, optional): Le taux d&#39;apprentissage du réseau. Defaults to 0.01.</span>
+<span class="sd">            epochs (int, optional): Le nombre d&#39;itération du réseau. Defaults to 30.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="n">epochs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_errors</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_errors</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Training.train"><a class="viewcode-back" href="../../../src.training.html#src.training.training.Training.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">X_test</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">y_test</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">,</span> <span class="n">batchs</span><span class="p">:</span> <span class="n">BatchIterator</span><span class="p">,</span> <span class="n">nn</span><span class="p">:</span> <span class="n">NeuralNetwork</span><span class="p">,</span> <span class="n">loss</span><span class="p">:</span> <span class="n">MSE</span><span class="p">(),</span> <span class="n">optimiseur</span><span class="p">:</span> <span class="n">SGD</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;Entrainement du réseau</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X_train (Tenseur): Les données d&#39;entraînement des variables explicatives</span>
+<span class="sd">            X_test (Tenseur): Les données de test des variables explicatives</span>
+<span class="sd">            y_train (Tenseur): Les données d&#39;entraînement de la variable à expliquer</span>
+<span class="sd">            y_test (Tenseur): Les données de test de la variable à expliquer</span>
+<span class="sd">            batchs (BatchIterator): Les options de création de batch</span>
+<span class="sd">            nn (NeuralNetwork): Architecture à adopter</span>
+<span class="sd">            loss (MSE): La fonction de perte qui sera utilisée</span>
+<span class="sd">            optimiseur (SGD): La technique d&#39;optimisation à utiliser</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epochs</span><span class="p">)):</span>  <span class="c1"># type: ignore</span>
+            <span class="n">train_losses</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">test_predictions</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">test_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">test_predictions</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">batchs</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+                <span class="n">train_predictions</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+                <span class="n">train_losses</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">train_predictions</span><span class="p">,</span> <span class="n">batch</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">grad_loss</span><span class="p">(</span><span class="n">train_predictions</span><span class="p">,</span> <span class="n">batch</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+                <span class="n">optimiseur</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lr</span><span class="p">)</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">nn</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">train_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_losses</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Training.graphic"><a class="viewcode-back" href="../../../src.training.html#src.training.training.Training.graphic">[docs]</a>    <span class="k">def</span> <span class="nf">graphic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graphic</span><span class="p">:</span> <span class="n">Graphic</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Affichage de l&#39;évolution des erreurs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            animation (Animation): objet permettant de tracer le graphique d&#39;évolution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">graphic</span><span class="o">.</span><span class="n">evolution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train_errors</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">test_errors</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

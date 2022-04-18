@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.nn.neuralnet &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Code du module</a> &raquo;</li>
+      <li>src.nn.neuralnet</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de src.nn.neuralnet</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;La première couche du réseau accepte en entrées un échantillon qu&#39;on lui fournit. Le réseau va ensuite </span>
+<span class="sd">effectuer des transformations dans chaque couche qui le compose (forward propagation) et suivant la </span>
+<span class="sd">perte mesurée au niveau de la sortie du réseau, il décidera s&#39;il faut modifier les paramètres avec</span>
+<span class="sd">la propagation en arrière (backward propagation) et refaire un forward. Ce processus se répète ainsi un </span>
+<span class="sd">certain nombre de fois jusqu&#39;à ce que la perte soit la plus minimale possible. Le réseau est configuré </span>
+<span class="sd">suivant la séquence de couches qu&#39;on lui fournit et la composition de chaque couche (nombre de noeuds).</span>
+
+<span class="sd">**A noter** : Un réseau profond réagira mieux qu&#39;avec un réseau étendu en largeur avec le même nombre de poids (ou paramètres). </span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="c1"># from src.layers.lineaire import Lineaire</span>
+<span class="kn">from</span> <span class="nn">src.tenseurs</span> <span class="kn">import</span> <span class="n">Tenseur</span>
+<span class="kn">from</span> <span class="nn">src.layers.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+
+
+<div class="viewcode-block" id="NeuralNetwork"><a class="viewcode-back" href="../../../src.nn.html#src.nn.neuralnet.NeuralNetwork">[docs]</a><span class="k">class</span> <span class="nc">NeuralNetwork</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Réseau de neurones&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reseau</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Layer</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialisation des paramètres</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            reseau (Sequence[Layer]): Une séquence de couches</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reseau</span> <span class="o">=</span> <span class="n">reseau</span>
+
+<div class="viewcode-block" id="NeuralNetwork.forward"><a class="viewcode-back" href="../../../src.nn.html#src.nn.neuralnet.NeuralNetwork.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tenseur</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Appliquer le forward propagation sur chaque couche</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inputs (Tenseur): Les données en entrée du réseau</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tenseur: La sortie du réseau</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">couche</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="p">:</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="n">couche</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inputs</span></div>
+
+<div class="viewcode-block" id="NeuralNetwork.backward"><a class="viewcode-back" href="../../../src.nn.html#src.nn.neuralnet.NeuralNetwork.backward">[docs]</a>    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grad</span><span class="p">:</span> <span class="n">Tenseur</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tenseur</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Appliquer le backward propagation sur chaque couche</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grad (Tenseur): Le gradient de la dernière couche</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tenseur: Le dernier gradien calculé lors de la backpropagation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">couche</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="p">):</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">couche</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grad</span></div>
+
+<div class="viewcode-block" id="NeuralNetwork.param_grad"><a class="viewcode-back" href="../../../src.nn.html#src.nn.neuralnet.NeuralNetwork.param_grad">[docs]</a>    <span class="k">def</span> <span class="nf">param_grad</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Tenseur</span><span class="p">,</span> <span class="n">Tenseur</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Récupération des paramètres et des gradients à l&#39;aide d&#39;un générateur</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Iterator[Tuple[Tenseur, Tenseur]]: Les paramètres et gradient du réseau</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">couche</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">couche</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="n">couche</span><span class="o">.</span><span class="n">grads</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">yield</span> <span class="n">param</span><span class="p">,</span> <span class="n">grad</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

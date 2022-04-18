@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.exemples.exemple_titanic &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.datas.html">src.datas package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.exemples.html">src.exemples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Code du module</a> &raquo;</li>
+      <li>src.exemples.exemple_titanic</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de src.exemples.exemple_titanic</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Effectuons des tests sur les données du titanic</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">src.graphic.animation</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">src.nn.neuralnet</span> <span class="kn">import</span> <span class="n">NeuralNetwork</span>
+<span class="kn">from</span> <span class="nn">src.datas.datas</span> <span class="kn">import</span> <span class="n">BatchIterator</span>
+<span class="kn">from</span> <span class="nn">src.exemples.test</span> <span class="kn">import</span> <span class="n">Test</span>
+<span class="kn">from</span> <span class="nn">src.graphic.simple_graphic</span> <span class="kn">import</span> <span class="n">Plot</span>
+<span class="kn">from</span> <span class="nn">src.training.training</span> <span class="kn">import</span> <span class="n">Training</span>
+
+
+<div class="viewcode-block" id="TestTitanic"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.exemple_titanic.TestTitanic">[docs]</a><span class="k">class</span> <span class="nc">TestTitanic</span><span class="p">(</span><span class="n">Test</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classe permettant d&#39;effectuer les tests sur les données du titanic.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="TestTitanic.test"><a class="viewcode-back" href="../../../src.exemples.html#src.exemples.exemple_titanic.TestTitanic.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sequence</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">loss</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">optimiseur</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">initialisation</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Application des tests suivant les hyperparamètres fournis</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sequence (List[str]): Une séquence de couches qui peuvent prendre les valeurs &#39;lineaire&#39; pour la couche linéaire,</span>
+<span class="sd">            &#39;sigmoide&#39; pour la couche sigmoide, &#39;relu&#39; pour la couche relu ou &#39;tanh&#39; pour tanh. La séquence doit être complète pour</span>
+<span class="sd">            éviter certains bug.</span>
+<span class="sd">            batch_size (int): La longueur d&#39;un batch.</span>
+<span class="sd">            learning_rate (float): Le taux d&#39;apprentissage.</span>
+<span class="sd">            epochs (int): Le nombre d&#39;itérations.</span>
+<span class="sd">            loss (str): La fonction perte à utiliser. Peut prendre les valeurs &#39;logistic&#39; pour la fonction de perte logistique, &#39;mse&#39;</span>
+<span class="sd">            pour l&#39;erreur quadratique, &#39;mae&#39; pour l&#39;erreur absolue ou &#39;hingeloss&#39; pour la perte hinge.</span>
+<span class="sd">            optimiseur (str): le type d&#39;optimiseur à utiliser. Peut prendre la valeur &#39;sgd&#39; pour la descente de gradient stochastique.</span>
+<span class="sd">            initialisation (str): Le type d&#39;initialisation des paramètres. Peut prendre les valeurs &#39;zero&#39; pour l&#39;initialisation avec des zeros,</span>
+<span class="sd">            &#39;aleatoire&#39; pour l&#39;initialisation avec des nombres aléatoires ou &#39;he&#39; pour l&#39;initialisation he.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Données</span>
+        <span class="n">titanic</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;titanic&quot;</span><span class="p">)</span>
+
+        <span class="c1">## La variable cible est la variable survived qui peut prendre les valeurs 1 (survie), 0 (non survie)</span>
+
+        <span class="c1"># Suppression de la variable deck qui contient beaucoup de valeurs manquantes</span>
+        <span class="n">titanic</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Eliminons les données manquantes</span>
+        <span class="n">titanic</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Codifions les données de type object, bool ou category</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">titanic</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s2">&quot;object&quot;</span><span class="p">,</span> <span class="s2">&quot;bool&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">titanic</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span>
+
+        <span class="n">target</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">&quot;survived&quot;</span><span class="p">]</span>
+
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">titanic</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;survived&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Normalisation des données</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">normalizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalisation</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_data</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">y_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Récupération du type d&#39;initialisation des paramètres</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_initialisation</span><span class="p">(</span><span class="n">initialisation</span><span class="p">)</span>
+
+        <span class="c1"># Réseau de neurones</span>
+        <span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># création de batch</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">BatchIterator</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="c1"># récupération de la fonction de perte</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_loss</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># récupération de la technique d&#39;optimisation</span>
+        <span class="n">optimisation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_optimiser</span><span class="p">(</span><span class="n">optimiseur</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># initialisation des options d&#39;entraînement</span>
+        <span class="n">Trainer</span> <span class="o">=</span> <span class="n">Training</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">epochs</span><span class="p">)</span>
+
+        <span class="c1"># Entrainement</span>
+        <span class="n">Trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">nn</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">optimisation</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># création du graphique</span>
+        <span class="n">graphic</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">()</span>
+
+        <span class="c1"># affichage des erreurs</span>
+        <span class="n">Trainer</span><span class="o">.</span><span class="n">graphic</span><span class="p">(</span><span class="n">graphic</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># print(Trainer.er)</span>
+        <span class="c1"># Les prédictions finales sur les données detes</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prédiction sur les données de Test :&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">T</span><span class="p">)):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">predicted</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;ligne </span><span class="si">{}</span><span class="s2"> : réel -&gt; </span><span class="si">{}</span><span class="s2"> - prédit (arrondi) -&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">predicted</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perte sur les données de test TITANIC : &quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>  <span class="c1"># type: ignore</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

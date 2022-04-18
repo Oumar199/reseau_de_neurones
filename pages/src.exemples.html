@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.exemples package &mdash; Documentation Réseau de neurones manu 1.0.3</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="src.graphic package" href="src.graphic.html" />
+    <link rel="prev" title="src.datas package" href="src.datas.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Réseau de neurones manu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="src.datas.html">src.datas package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src.exemples package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.exemples.exemple_boston">src.exemples.exemple_boston module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.exemples.exemple_iris">src.exemples.exemple_iris module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.exemples.exemple_titanic">src.exemples.exemple_titanic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.exemples.test">src.exemples.test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.exemples">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.graphic.html">src.graphic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.initialisation.html">src.initialisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.layers.html">src.layers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.lossfunction.html">src.lossfunction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.nn.html">src.nn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.optimisation.html">src.optimisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.tenseurs.html">src.tenseurs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.training.html">src.training package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Réseau de neurones manu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>src.exemples package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.exemples.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-exemples-package">
+<h1>src.exemples package<a class="headerlink" href="#src-exemples-package" title="Lien permanent vers ce titre"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre"></a></h2>
+</section>
+<section id="module-src.exemples.exemple_boston">
+<span id="src-exemples-exemple-boston-module"></span><h2>src.exemples.exemple_boston module<a class="headerlink" href="#module-src.exemples.exemple_boston" title="Lien permanent vers ce titre"></a></h2>
+<p>Effectuons des tests sur les données sur les maisons de boston</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.exemples.exemple_boston.TestBoston">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.exemples.exemple_boston.</span></span><span class="sig-name descname"><span class="pre">TestBoston</span></span><a class="reference internal" href="_modules/src/exemples/exemple_boston.html#TestBoston"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.exemple_boston.TestBoston" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.exemples.test.Test" title="src.exemples.test.Test"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.exemples.test.Test</span></code></a></p>
+<p>Classe permettant d’effectuer les tests sur les données de boston houses.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.exemple_boston.TestBoston.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimiseur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialisation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/exemples/exemple_boston.html#TestBoston.test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.exemple_boston.TestBoston.test" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Application des tests suivant les hyperparamètres fournis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – Une séquence de couches qui peuvent prendre les valeurs “lineaire” pour la couche linéaire,</p></li>
+<li><p><strong>sigmoide</strong> (<em>'sigmoide' pour la couche</em>) – </p></li>
+<li><p><strong>pour</strong> (<em>'relu' pour la couche relu ou 'tanh' pour tanh. La séquence doit être complète</em>) – </p></li>
+<li><p><strong>bug.</strong> (<em>éviter certains</em>) – </p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – La longueur d’un batch.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Le taux d’apprentissage.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Le nombre d’itérations.</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – La fonction perte à utiliser. Peut prendre les valeurs “logistic” pour la fonction de perte logistique, “mse”</p></li>
+<li><p><strong>quadratique</strong> (<em>pour l'erreur</em>) – </p></li>
+<li><p><strong>hinge.</strong> (<em>'mae' pour l'erreur absolue ou 'hingeloss' pour la perte</em>) – </p></li>
+<li><p><strong>optimiseur</strong> (<em>str</em>) – le type d’optimiseur à utiliser. Peut prendre la valeur “sgd” pour la descente de gradient stochastique.</p></li>
+<li><p><strong>initialisation</strong> (<em>str</em>) – Le type d’initialisation des paramètres. Peut prendre les valeurs “zero” pour l’initialisation avec des zeros,</p></li>
+<li><p><strong>he.</strong> (<em>'aleatoire' pour l'initialisation avec des nombres aléatoires ou 'he' pour l'initialisation</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.exemples.exemple_iris">
+<span id="src-exemples-exemple-iris-module"></span><h2>src.exemples.exemple_iris module<a class="headerlink" href="#module-src.exemples.exemple_iris" title="Lien permanent vers ce titre"></a></h2>
+<p>Effectuons des tests sur les données iris</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.exemples.exemple_iris.TestIris">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.exemples.exemple_iris.</span></span><span class="sig-name descname"><span class="pre">TestIris</span></span><a class="reference internal" href="_modules/src/exemples/exemple_iris.html#TestIris"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.exemple_iris.TestIris" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.exemples.test.Test" title="src.exemples.test.Test"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.exemples.test.Test</span></code></a></p>
+<p>Classe permettant d’effectuer les tests sur les données des fleurs d’iris.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.exemple_iris.TestIris.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimiseur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialisation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/exemples/exemple_iris.html#TestIris.test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.exemple_iris.TestIris.test" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Application des tests suivant les hyperparamètres fournis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – Une séquence de couches qui peuvent prendre les valeurs “lineaire” pour la couche linéaire,</p></li>
+<li><p><strong>sigmoide</strong> (<em>'sigmoide' pour la couche</em>) – </p></li>
+<li><p><strong>pour</strong> (<em>'relu' pour la couche relu ou 'tanh' pour tanh. La séquence doit être complète</em>) – </p></li>
+<li><p><strong>bug.</strong> (<em>éviter certains</em>) – </p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – La longueur d’un batch.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Le taux d’apprentissage.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Le nombre d’itérations.</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – La fonction perte à utiliser. Peut prendre les valeurs “logistic” pour la fonction de perte logistique, “mse”</p></li>
+<li><p><strong>quadratique</strong> (<em>pour l'erreur</em>) – </p></li>
+<li><p><strong>hinge.</strong> (<em>'mae' pour l'erreur absolue ou 'hingeloss' pour la perte</em>) – </p></li>
+<li><p><strong>optimiseur</strong> (<em>str</em>) – le type d’optimiseur à utiliser. Peut prendre la valeur “sgd” pour la descente de gradient stochastique.</p></li>
+<li><p><strong>initialisation</strong> (<em>str</em>) – Le type d’initialisation des paramètres. Peut prendre les valeurs “zero” pour l’initialisation avec des zeros,</p></li>
+<li><p><strong>he.</strong> (<em>'aleatoire' pour l'initialisation avec des nombres aléatoires ou 'he' pour l'initialisation</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.exemples.exemple_titanic">
+<span id="src-exemples-exemple-titanic-module"></span><h2>src.exemples.exemple_titanic module<a class="headerlink" href="#module-src.exemples.exemple_titanic" title="Lien permanent vers ce titre"></a></h2>
+<p>Effectuons des tests sur les données du titanic</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.exemples.exemple_titanic.TestTitanic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.exemples.exemple_titanic.</span></span><span class="sig-name descname"><span class="pre">TestTitanic</span></span><a class="reference internal" href="_modules/src/exemples/exemple_titanic.html#TestTitanic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.exemple_titanic.TestTitanic" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#src.exemples.test.Test" title="src.exemples.test.Test"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.exemples.test.Test</span></code></a></p>
+<p>Classe permettant d’effectuer les tests sur les données du titanic.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.exemple_titanic.TestTitanic.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimiseur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialisation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/exemples/exemple_titanic.html#TestTitanic.test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.exemple_titanic.TestTitanic.test" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Application des tests suivant les hyperparamètres fournis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – Une séquence de couches qui peuvent prendre les valeurs “lineaire” pour la couche linéaire,</p></li>
+<li><p><strong>sigmoide</strong> (<em>'sigmoide' pour la couche</em>) – </p></li>
+<li><p><strong>pour</strong> (<em>'relu' pour la couche relu ou 'tanh' pour tanh. La séquence doit être complète</em>) – </p></li>
+<li><p><strong>bug.</strong> (<em>éviter certains</em>) – </p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – La longueur d’un batch.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Le taux d’apprentissage.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Le nombre d’itérations.</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – La fonction perte à utiliser. Peut prendre les valeurs “logistic” pour la fonction de perte logistique, “mse”</p></li>
+<li><p><strong>quadratique</strong> (<em>pour l'erreur</em>) – </p></li>
+<li><p><strong>hinge.</strong> (<em>'mae' pour l'erreur absolue ou 'hingeloss' pour la perte</em>) – </p></li>
+<li><p><strong>optimiseur</strong> (<em>str</em>) – le type d’optimiseur à utiliser. Peut prendre la valeur “sgd” pour la descente de gradient stochastique.</p></li>
+<li><p><strong>initialisation</strong> (<em>str</em>) – Le type d’initialisation des paramètres. Peut prendre les valeurs “zero” pour l’initialisation avec des zeros,</p></li>
+<li><p><strong>he.</strong> (<em>'aleatoire' pour l'initialisation avec des nombres aléatoires ou 'he' pour l'initialisation</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.exemples.test">
+<span id="src-exemples-test-module"></span><h2>src.exemples.test module<a class="headerlink" href="#module-src.exemples.test" title="Lien permanent vers ce titre"></a></h2>
+<p>Nous devons pouvoir effectuer des tests sur des données. Ainsi il sera nécessaire de devoir fournir des
+hyperparamètres pour effectuer les entraînements et choisir le type de test à effectuer.</p>
+<p>Nous effectuerons dans cet exemple un test sur les données concernant les fleurs d’iris.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.exemples.test.Test">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.exemples.test.</span></span><span class="sig-name descname"><span class="pre">Test</span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe créée pour effectuer des tests.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.get_initialisation">
+<span class="sig-name descname"><span class="pre">get_initialisation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initialisation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.initialisation.html#src.initialisation.initialisation.Initialisation" title="src.initialisation.initialisation.Initialisation"><span class="pre">src.initialisation.initialisation.Initialisation</span></a></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.get_initialisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.get_initialisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Récupération du type d’initialisation des paramètres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>initialisation</strong> (<em>str</em>) – Le nom du type d’initialisation.</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>La classe d’initialisation.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.initialisation.html#src.initialisation.initialisation.Initialisation" title="src.initialisation.initialisation.Initialisation">Initialisation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.get_loss">
+<span class="sig-name descname"><span class="pre">get_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.lossfunction.html#src.lossfunction.loss.Loss" title="src.lossfunction.loss.Loss"><span class="pre">src.lossfunction.loss.Loss</span></a></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.get_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.get_loss" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Récupération de la fonction de perte</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>loss</strong> (<em>str</em>) – Le nom de la fonction de perte</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>La fonction de perte</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.lossfunction.html#src.lossfunction.loss.Loss" title="src.lossfunction.loss.Loss">Loss</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.get_optimiser">
+<span class="sig-name descname"><span class="pre">get_optimiser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimiseur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.optimisation.html#src.optimisation.optimize.Optimisation" title="src.optimisation.optimize.Optimisation"><span class="pre">src.optimisation.optimize.Optimisation</span></a></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.get_optimiser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.get_optimiser" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Récupération de l’optimiseur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>optimiseur</strong> (<em>str</em>) – Nom de l’optimiseur ou de la technique d’optimisation.</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>L’optimiseur.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.optimisation.html#src.optimisation.optimize.Optimisation" title="src.optimisation.optimize.Optimisation">Optimisation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.get_sequence">
+<span class="sig-name descname"><span class="pre">get_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.nn.html#src.nn.neuralnet.NeuralNetwork" title="src.nn.neuralnet.NeuralNetwork"><span class="pre">src.nn.neuralnet.NeuralNetwork</span></a></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.get_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.get_sequence" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Permet de déterminer la séquence de couches</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>sequence</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – Séquence de couches</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.normalisation">
+<span class="sig-name descname"><span class="pre">normalisation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'standard'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.normalisation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.normalisation" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Permet la normalisation des données</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Tenseur</em>) – Les données à normaliser</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – Le mode de normalisation. Peut prendre une valeur entre “standard”</p></li>
+<li><p><strong>standardisation</strong> (<em>pour la</em>) – </p></li>
+<li><p><strong>la</strong> (<em>'minmax' pour la normalisation min_max ou 'robust' pour</em>) – </p></li>
+<li><p><strong>&quot;standard&quot;.</strong> (<em>normalisation robuste. Defaults to</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Les données normalisées</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tenseur</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.split_data">
+<span class="sig-name descname"><span class="pre">split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.split_data" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Séparation des données en données d’entraînement et en données de test</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>Tenseur</em>) – Les variables explicatives</p></li>
+<li><p><strong>y</strong> (<em>Tenseur</em>) – La variable à expliquée</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – La taille des données de test. Defaults to 0.2.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – _description_. Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Les données générées</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>Tuple[Tenseur]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.exemples.test.Test.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimiseur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/exemples/test.html#Test.test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.exemples.test.Test.test" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Application des tests suivant les hyperparamètres fournis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – Une séquence de couches qui peuvent prendre les valeurs “lineaire” pour la couche linéaire,</p></li>
+<li><p><strong>sigmoide</strong> (<em>'sigmoide' pour la couche</em>) – </p></li>
+<li><p><strong>pour</strong> (<em>'relu' pour la couche relu ou 'tanh' pour tanh. La séquence doit être complète</em>) – </p></li>
+<li><p><strong>bug.</strong> (<em>éviter certains</em>) – </p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – La longueur d’un batch.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Le taux d’apprentissage.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Le nombre d’itérations.</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – La fonction perte à utiliser. Peut prendre les valeurs “logistic” pour la fonction de perte logistique, “mse”</p></li>
+<li><p><strong>quadratique</strong> (<em>pour l'erreur</em>) – </p></li>
+<li><p><strong>hinge.</strong> (<em>'mae' pour l'erreur absolue ou 'hingeloss' pour la perte</em>) – </p></li>
+<li><p><strong>optimiseur</strong> (<em>str</em>) – le type d’optimiseur à utiliser. Peut prendre la valeur “sgd” pour la descente de gradient stochastique.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.exemples">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.exemples" title="Lien permanent vers ce titre"></a></h2>
+<section id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Lien permanent vers ce titre"></a></h3>
+<p>Effectuons des tests sur des données réelles ou fictives</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="src.datas.html" class="btn btn-neutral float-left" title="src.datas package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="src.graphic.html" class="btn btn-neutral float-right" title="src.graphic package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Oumar Kane.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
